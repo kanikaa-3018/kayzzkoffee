@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+@import 'animate.css';
+/* Add this to your styles.css or a similar CSS file */
+.bg-gradient-custom {
+  background:rgb(253,253,253,0.1);
+}
+
+body {
+  padding: 0;
+  font-family: 'poppins', sans-serif;
+  
+}
+
+
+.coffee {
+  font-family: 'Jersey 10', sans-serif;
+   /* Adjust size as needed */
+  color: #9E7148;  /* Optional styling */
+  text-transform: uppercase; /* Optional to make it look bold */
+}
+
+.card {
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 24px 24px 0 0; /* Match the container's rounded corners */
+}
+
+.aboutus {
+  font-family: 'Jersey 10', sans-serif;
+}
+.coffeeitem, .coffeeiq{
+  font-family: 'Jersey 10', sans-serif;
+}
+
+/* Ensure the class is applied correctly to the target images */
+.coffeeimage {
+  position: relative; /* To position child elements absolutely */
+}
+
+.coffeeimage:nth-child(1) { /* Example: Apply to the first child, adjust as needed */
+  position: relative;
+}
+
+.coffeeimage:nth-child(1)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -30px; /* Adjust to position circles outside the image */
+  transform: translateY(-50%);
+  width: 50px; /* Adjust width of container holding circles */
+  height: 50px; /* Adjust height of container holding circles */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.coffeeimage:nth-child(1)::after::before {
+  content: "";
+  display: block;
+  width: 10px; /* Adjust size of circles */
+  height: 10px; /* Adjust size of circles */
+  background-color: #BEA68E; /* Adjust color of circles */
+  border-radius: 50%;
+  margin-bottom: 5px; /* Space between circles */
+}
+
+
+  .selected-coffee {
+    color: #D2AF8C !important; /* Change to your desired highlight color */
+  }
+
+  .hidden {
+    display: none;
+  }
+  
+  .result-animation {
+    text-align: center;
+    margin-top: 50px;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: fadeInUp 1s ease forwards;
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Optional: Ensure the result stays centered */
+  #result {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Full screen height */
+  }
+  
+  @keyframes slideRightLeft {
+    0% {
+      transform: translateX(100%);
+    }
+    50% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  #result-gif.show-animation {
+    animation: slideRightLeft 2s ease-in-out forwards infinite;
+  }
+/* Add this CSS for the moving background */
+.dynamic-bg {
+  position: relative;
+  background: linear-gradient(120deg, #0f0f0f, #633620, #9E7148);
+  background-size: 400% 400%;
+  animation: moveBg 10s ease infinite;
+}
+
+@keyframes moveBg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+#tsparticles {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.flash-message {
+  background-color: #9E7148;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+/* Hide scrollbars */
+.coffee-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.coffee-container {
+  -ms-overflow-style: none;  /* Hide scrollbar for Internet Explorer and Edge */
+  scrollbar-width: none;  /* Hide scrollbar for Firefox */
+}
+
+
+
+.coffee-container > div.snap-center {
+  filter: none;
+}
+
+
+
+  

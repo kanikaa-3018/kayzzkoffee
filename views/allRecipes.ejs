@@ -1,0 +1,85 @@
+<% include ./partials/header.ejs %>
+
+<div class="w-full min-h-screen bg-[#0f0f0f] px-10 py-5">
+  <div class="flash-message-container">
+  <% if (success_msg.length > 0) { %>
+    <div class="alert alert-success flash-message ml-[1100px]" id="flash-message">
+      <%= success_msg %>
+    </div>
+  <% } %>
+  
+  <% if (error_msg.length > 0) { %>
+    <div class="alert alert-danger flash-message ml-[1100px]" id="flash-message">
+      <%= error_msg %>
+    </div>
+  <% } %>
+</div>
+  
+ 
+  <h1 class="text-6xl text-[#D2AF8C] mb-8 coffeeitem font-bold text-center">All Coffee Recipes</h1>
+  
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+    <% recipes.forEach(function(recipe) { %>
+      <div class="bg-[#1a1a1a] p-5 rounded-lg shadow-md">
+        <img src="<%= recipe.imageUrl %>" alt="<%= recipe.title %>" class="w-full h-40 object-cover mb-4 rounded-lg">
+        <h2 class="text-2xl text-[#D2AF8C] mb-2 capitalize font-semibold"><%= recipe.title %></h2>
+        <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" alt="">
+        <p class="text-gray-400 pt-2"><strong>Description:</strong> <%= recipe.description %></p>
+        <p class="text-gray-400 mt-2"><strong>Steps:</strong> <%= recipe.steps.slice(0, 10).join(', ') %>.....</p>
+        <div class="text-gray-400 mt-2 flex">
+          <strong>Likes:</strong> <%= recipe.likes %>
+          <form action="/recipes/like/<%= recipe._id %>" method="POST" class="pl-[245px] mb-3">
+            <button type="submit" class="text-red-600 hover:underline"><i class="ri-heart-line pr-1"></i>Like</button>
+          </form>
+        </div>
+        <a href="/recipes/recipe/<%= recipe._id %>" class="text-gray-400 hover:underline bg-[rgb(253,253,253,0.2)] px-16 rounded-sm mt-4 text-sm py-2 w-full ml-[150px]">Read More</a>
+      </div>
+      
+    <% }) %>
+  </div>
+
+  
+</div>
+
+
+<% include ./partials/footer.ejs %>
+
+
+<script>
+  
+  setTimeout(() => {
+    const flashMessage = document.getElementById('flash-message');
+    if (flashMessage) {
+      flashMessage.style.display = 'none';
+    }
+  }, 2000);
+</script>
+
+<style>
+  .flash-message-container {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    margin-top: 8px;
+    background-color: #0f0f0f;
+  }
+
+  .flash-message {
+    width: 300px;
+    padding: 4px 5px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.5s ease;
+  }
+
+  .alert-success {
+    background-color: #28a745;
+    color: white;
+  }
+
+  .alert-danger {
+    background-color: #dc3545;
+    color: white;
+  }
+</style>

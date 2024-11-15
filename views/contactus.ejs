@@ -1,0 +1,62 @@
+<% include ./partials/header.ejs%>
+<% include ./partials/navbar.ejs%>
+
+<% if (success_msg.length > 0) { %>
+  <div class="alert alert-success text-center bg-[#D2AF8C]" id="flash-message">
+    <%= success_msg %>
+  </div>
+<% } %>
+<!-- <% if (error_msg.length > 0) { %>
+  <div class="alert alert-danger flash-message ml-[1100px]" id="flash-message">
+    <%= error_msg %>
+  </div>
+<% } %> -->
+<div
+  class="bg-[#0f0f0f] w-full min-h-screen flex flex-col items-center gap-16 dynamic-bg"
+  id="tsparticles"
+>
+  <h1
+    class="text-5xl font-bold text-[#9E7148] mt-24 coffeeitem w-1/2 text-center"
+  >
+    Want to be part of this caffeinated community? JOIN US
+  </h1>
+  <form action="/submit" class="flex flex-col w-[700px] gap-4" method="post">
+    <input
+      type="text"
+      name="fullname"
+      placeholder="Name:"
+      class="px-3 py-3 rounded-md bg-[rgb(253,253,253,0.2)]"
+    />
+    <input
+      type="text"
+      name="email"
+      placeholder="Email:"
+      class="px-3 py-3 rounded-md bg-[rgb(253,253,253,0.2)]"
+    />
+    <input
+      type="text"
+      name="suggestions"
+      placeholder="Suggestions:"
+      class="px-3 py-3 rounded-md bg-[rgb(253,253,253,0.2)]"
+    />
+    <input
+      class="text-white font-semibold text-xl bg-[#633620] px-3 py-3 rounded-md hover:bg-[#9E7148]"
+      value="Submit"
+      type="submit"
+    />
+  </form>
+  
+</div>
+
+
+<% include ./partials/footer.ejs%>
+
+<script>
+  // Hide the flash message after 5-6 seconds
+  setTimeout(() => {
+    const flashMessage = document.getElementById('flash-message');
+    if (flashMessage) {
+      flashMessage.style.display = 'none';
+    }
+  }, 2000);
+</script>

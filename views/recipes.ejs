@@ -1,0 +1,27 @@
+<% include ./partials/header.ejs %>
+
+<%include ./partials/navbar.ejs %>
+<div class="flex justify-between bg-[#0f0f0f] px-8 pt-4">
+  <a href="/recipes" class="text-white px-3 py-1 rounded-sm bg-[#9E7148]">Add a new recipe</a>
+  <a href="/recipes/allRecipes" class="text-[#9E7148] px-3 py-1 rounded-sm bg-[#fff]">View all recipes</a>
+</div>
+
+<div class="w-full min-h-screen bg-[#0f0f0f] flex items-center justify-between pl-32">
+    
+    <div>
+        <img src="https://user-images.githubusercontent.com/74038190/212744287-14f66c13-5458-40dc-9244-8ff533fc8f4a.gif" alt="">
+        <h1 class="font-bold text-6xl text-[#D2AF8C] coffeeitem">SHARE YOUR COFFEE MAGIC</h1>
+        <form class="text-white flex flex-col gap-4" action="/recipes/add" method="POST" enctype="multipart/form-data">
+            <input type="file" class="pt-16 pb-4" name="imageUrl">
+            <input type="text" placeholder="Title:" name="title" class=" rounded-sm px-3 py-2 bg-[rgb(254,254,254,0.1)] border-none">
+            <input type="text" placeholder="Ingeredients:" name="ingredients" class=" rounded-sm px-3 py-2 bg-[rgb(254,254,254,0.1)] border-none">
+            <textarea id="" placeholder="Description" name="description" class=" rounded-sm px-3 py-2 bg-[rgb(254,254,254,0.1)]"></textarea>
+            <input type="text" placeholder="Steps:" name="steps" class=" rounded-sm px-3 py-2 bg-[rgb(254,254,254,0.1)]">
+            <input type="text" placeholder="Your extra touch:" name="extraTouch" class=" rounded-sm px-3 py-2 bg-[rgb(254,254,254,0.1)]">
+            <input type="submit" value="Submit Your Recipe" class="px-4 py-2 bg-[#9E7148] text-white mt-6 rounded-sm font-semibold hover:bg-[#5E331F]">
+        </form>
+    </div>
+    <img src="../images/recipe.png" alt="">
+
+</div>
+<% include ./partials/footer.ejs %>

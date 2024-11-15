@@ -1,0 +1,166 @@
+<% include ./partials/header.ejs %>
+
+<%include ./partials/navbar.ejs %>
+
+<div
+  class="bg-[url('./images/quizbg.png')] object-cover w-full min-h-screen justify-around flex flex-col"
+>
+  <div class="flex flex-col justify-center items-center">
+    <h1
+      class="text-white text-7xl items-center align-center flex justify-center w-1/2"
+    >
+      <span class="coffeeiq">WELCOME TO BREWIQ,<br /></span>
+    </h1>
+    <p class="text-2xl font-semibold text-[#D2AF8C]">
+      The ultimate brew grinding for you to experience..!
+    </p>
+  </div>
+
+  <div
+    class="w-[700px] bg-[rgb(253,253,253,0.3)] align-center px-16 pt-8 -mt-24 rounded-lg ml-[310px]"
+  >
+    <form id="quiz-form" class="text-white items-center justify-center">
+      <% questions.forEach((question, index) => { %>
+      <div class="question-container <% if (index !== 0) { %>hidden<% } %>">
+        <div class="mb-6">
+          <p class="text-lg font-semibold text-black">
+            <%= index + 1 %>. <%= question.text %>
+          </p>
+          <% question.options.forEach((option, i) => { %>
+          <div class="mt-2">
+            <input
+              type="radio"
+              id="q<%= index %>o<%= i %>"
+              name="q<%= index %>"
+              value="<%= option.value %>"
+              class="mr-2"
+            />
+            <label for="q<%= index %>o<%= i %>"><%= option.text %></label>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+      <% }); %>
+
+      <div class="navigation-buttons flex justify-between mt-4">
+        <button
+          type="button"
+          id="prev-button"
+          class="px-4 py-2 bg-[#9E7148] text-white rounded-md hover:bg-[#D2AF8C]"
+          disabled
+        >
+          Previous
+        </button>
+        <button
+          type="button"
+          id="next-button"
+          class="px-4 py-2 bg-[#9E7148] text-white rounded-md hover:bg-[#D2AF8C]"
+        >
+          Next
+        </button>
+        <button
+          type="submit"
+          id="submit-button"
+          class="px-4 py-2 bg-[#9E7148] text-white rounded-md hover:bg-[#D2AF8C] hidden"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+
+    <div class="w-full flex justify-center my-4">
+        <img
+          id="result-gif"
+          src="https://private-user-images.githubusercontent.com/74038190/325895973-e4f28204-ea88-4364-a321-8330c3fbde6a.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjYzNDI0NTMsIm5iZiI6MTcyNjM0MjE1MywicGF0aCI6Ii83NDAzODE5MC8zMjU4OTU5NzMtZTRmMjgyMDQtZWE4OC00MzY0LWEzMjEtODMzMGMzZmJkZTZhLmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA5MTQlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwOTE0VDE5MjkxM1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWFlNzc5MzU5OGIyOTY2MDM4MzZmOWE2MzI5YTg4YmMzZTIzMmEwYjFjNGQwZTk0Yzg3NDhiZmQ2ZTkyMTNmZWMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.uH22xDELFpmUmQmyn_muQclCADRBCTMVW74UcuKk9PQ"
+          alt="Quiz animation"
+          class="w-20 h-auto hidden"
+        />
+      </div>
+    
+    <div
+      id="result"
+      class="my-4 mx-8 text-white items-center justify-center px-36"
+    >
+</div>
+  </div>
+</div>
+
+<% include ./partials/footer.ejs %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const questions = document.querySelectorAll(".question-container");
+    const prevButton = document.getElementById("prev-button");
+    const nextButton = document.getElementById("next-button");
+    const submitButton = document.getElementById("submit-button");
+    const quizForm = document.getElementById("quiz-form");
+    const resultDiv = document.getElementById("result");
+    const gif = document.getElementById("result-gif");
+
+    let currentQuestionIndex = 0;
+
+    function updateQuestionVisibility() {
+      questions.forEach((question, index) => {
+        question.classList.toggle("hidden", index !== currentQuestionIndex);
+      });
+
+      prevButton.disabled = currentQuestionIndex === 0;
+      nextButton.style.display =
+        currentQuestionIndex === questions.length - 1 ? "none" : "inline-block";
+      submitButton.style.display =
+        currentQuestionIndex === questions.length - 1 ? "inline-block" : "none";
+    }
+
+    prevButton.addEventListener("click", () => {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        updateQuestionVisibility();
+      }
+    });
+
+    nextButton.addEventListener("click", () => {
+      if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        updateQuestionVisibility();
+      }
+    });
+
+    updateQuestionVisibility();
+
+    
+    document
+      .getElementById("quiz-form")
+      .addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const responses = {};
+        formData.forEach((value, key) => {
+          responses[key] = value;
+        });
+
+        
+        const response = await fetch("/quiz/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(responses),
+        });
+
+        const result = await response.json();
+
+        
+        quizForm.classList.add("hidden");
+        resultDiv.classList.remove("hidden");
+        resultDiv.innerHTML = `
+        <h2 class="text-2xl font-bold text-[#0f0f0f] w-[200px]">Your Score: ${result.score}</h2>
+        <p>${result.message}</p>
+      `;
+
+      
+      gif.classList.remove("hidden");
+      gif.classList.add("show-animation");
+      
+      });
+  });
+</script>
