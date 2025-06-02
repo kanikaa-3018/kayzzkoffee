@@ -7,12 +7,6 @@ Welcome to **KayzzKoffee**, an interactive coffee web app designed to bring the 
 
 ---
 
-## 📸 Preview
-
-![App Preview](https://user-images.githubusercontent.com/your-link-here.png) <!-- Optional preview image link -->
-
----
-
 ## 🚀 Features
 
 ### 👤 Authentication
