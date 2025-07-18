@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const expressSession = require("express-session");
+const session = require("express-session");
 const flash = require('connect-flash');
 const passport = require('passport');
 const createError = require('http-errors');
@@ -39,12 +39,24 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 
+// app.use(
+//   expressSession({
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: { secure: false },
+//     secret: process.env.EXPRESS_SESSION_SECRET,
+//   })
+// );
+
 app.use(
-  expressSession({
+  session({
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false },
-    secret: process.env.EXPRESS_SESSION_SECRET,
+    cookie: {
+      secure: false, // set true in production with HTTPS
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
+    },
   })
 );
 app.use(passport.initialize());
